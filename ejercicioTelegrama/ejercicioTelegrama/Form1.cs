@@ -25,17 +25,25 @@ namespace ejercicioTelegrama
             double coste;
             //Leo el telegrama
             textoTelegrama = txtTelegrama.Text;
+            if((!rdbtnUrgente.Checked && !rdbtnOrdinario.Checked))
+            {
+                MessageBox.Show("Por favor, seleccione el tipo de telegrama");
+                return;
+            }
             // telegrama urgente?
-            if (chkUrgente.Checked)
+            if (rdbtnUrgente.Checked)
             {
                 tipoTelegrama = 'u';
             }
             //Obtengo el número de palabras que forma el telegrama
-            string[] palabras = textoTelegrama.Split(' '); //separa las palabras y las introduce en una estructura
-            numPalabras = palabras.Length; //Obtiene la longitud de la estructura, que será el número de palabras
-                                           //Si el telegrama es ordinario
-            if (tipoTelegrama == ' ')
+            string[] palabras = textoTelegrama.Split(' '); 
+            //Separa las palabras y las introduce en una estructura
+            numPalabras = palabras.Length; 
+            //Obtiene la longitud de la estructura, que será el número de palabras
+            //Si el telegrama es ordinario
+            if (rdbtnOrdinario.Checked)
             {
+                tipoTelegrama = ' ';
                 if (numPalabras <= 10)
                 {
                     coste = 2.5;
@@ -45,7 +53,7 @@ namespace ejercicioTelegrama
                     coste = 2.5 + 0.5 * (numPalabras - 10);
                 }
             }
-            else
+            else 
             //Si el telegrama es urgente
             {
                 if (tipoTelegrama == 'u')
@@ -65,6 +73,15 @@ namespace ejercicioTelegrama
                 }
             }
             txtPrecio.Text = coste.ToString() + " euros";
+        }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbtnUrgente_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
